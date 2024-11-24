@@ -1,0 +1,26 @@
+https://siddhantacademy101.medium.com/step-by-step-guide-to-setting-up-an-azure-load-balancer-for-optimal-traffic-distribution-235e619c7922
+
+https://k21academy.com/microsoft-azure/architect/azure-load-balancer-step-by-step/
+https://medium.com/@subhampradhan966/understanding-the-basic-load-balancer-in-azure-an-essential-guide-527e9b118422
+
+
+- azure log analytics
+
+To collect logs from both your application and virtual machines (VMs) in Azure, you can use Azure Monitor
+
+. Here's a step-by-step guide:
+
+    Create a Log Analytics workspace: This is where your logs will be stored and analyzed
+.
+
+Install the Azure Monitor Agent: On your VMs, install the Azure Monitor Agent to collect data from the guest operating system
+
+.
+
+Enable Log Collection: Configure the agent to collect logs and metrics from your VMs
+
+.
+
+Set up Application Insights: For your applications, integrate Application Insights to collect telemetry data and logs.
+
+Query Logs: Use Log Analytics in the Azure portal to run queries and analyze the collected data
