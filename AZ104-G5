@@ -1,162 +1,26 @@
-Web Service Design:
-Hosting 2 Apps on Azure VMs:
-Configuration:
+Aufgabe 1: Scholarship  
+azure Load Balancer and Backup Scenario
+Scenario Overview: A company, WebServe Solutions, operates two critical applications that are hosted on separate virtual machines (VMs) in Azure. To ensure high availability, the company wants to implement an Azure Load Balancer to distribute traffic between the VMs. Additionally, the company needs a robust backup solution to protect the applications and their data, and a logging mechanism to store and monitor application logs for operational insights and troubleshooting.
+Your task as an Azure Administrator is to design and demonstrate how to implement these requirements by using an Azure Load Balancer for traffic distribution, setting up an auto-mated backup solution, and configuring log storage for the two applications.
+Goals:
+1.	Implement Azure Load Balancer: Demonstrate the configuration and usage of Az-ure Load Balancer to evenly distribute traffic between the two applications hosted on separate virtual machines.
+2.	Backup Solution for Applications: Design and implement a backup strategy for both applications to ensure data protection and easy recovery in case of failure.
+3.	Store Application Logs: Set up a logging solution to capture and store application logs, ensuring that logs are accessible for monitoring, troubleshooting, and auditing purposes.
+Student Notes:
+•	Load Balancer Configuration: Set up an Azure Load Balancer to distribute incom-ing traffic between the two VMs hosting the applications. Consider configuring health probes to monitor the health of each VM, ensuring traffic is only directed to healthy instances.
+•	Application Backup Strategy: You must design a backup plan for the two applica-tions running on the VMs.
+•	Logging and Monitoring: Implement a solution to collect, store, and manage logs for both applications.
+Important Considerations:
+•	Load Balancer Design: Consider the different types of load balancers (public and in-ternal) based on the applications' requirements.
+•	Backup Solution: The backup solution must ensure that both the applications and the VMs they are hosted on are protected. This includes VM snapshots, application-level backups, and database backups if necessary.
+•	Log Management: Ensure that logs from both VMs are stored in a centralized loca-tion.
+•	Cost Optimization
+Expectations:
+•	Load Balancer Demonstration: Students should demonstrate how Azure Load Bal-ancer works by configuring it to distribute traffic across the two VMs.  
+•	Backup Solution Implementation: They must demonstrate how to schedule backups and how to restore applications or VMs from backups in case of failure.
+•	Log Storage and Monitoring: Students should set up a logging solution that cap-tures application and system logs from both VMs. Scenario Summary:
+In this scenario, students will design and implement a highly available solution using Azure Load Balancer, ensure data protection with a robust backup solution, and set up centralized log storage and monitoring for the applications hosted on Azure VMs.
 
-Use two separate Azure VMs (VM1 and VM2).
-Install IIS (Internet Information Services) on both VMs.
-Host a small HTML page on each VM to show the content (e.g., "VM1 is online" and "VM2 is online").
-No need for a separate Azure Storage account since the websites are hosted directly on IIS.
-Availability Set:
 
-Place both VMs in the same Availability Set to ensure high availability within an Azure region.
-This minimizes downtime during Azure updates or failures.
-Scale Set Decision:
 
-A Virtual Machine Scale Set is not necessary due to the static nature of the web pages and the cost consideration.
-Alternative (Web App Service):
-
-Using Azure App Service instead of VMs can be considered for reduced cost and management overhead, as it's a Platform-as-a-Service (PaaS). However, it depends on the customer's preference for VM-based hosting.
-Storage for Database:
-If the apps require a database:
-Use Azure SQL Database (PaaS) for better performance and lower management costs compared to hosting a database on VMs.
-Alternatively, host a database on one of the VMs if budget constraints are strict, though this is less secure and scalable.
-2. Azure Load Balancer:
-Public Load Balancer:
-Use a Public Load Balancer to distribute incoming traffic between VM1 and VM2.
-
-Configuration Steps:
-
-Create a Public Load Balancer in Azure.
-Add both VMs to the Backend Pool.
-Configure a Health Probe (e.g., HTTP/TCP on Port 80) to ensure traffic is only routed to healthy VMs.
-Set up a Load Balancing Rule to direct traffic across the two VMs.
-Security Considerations:
-
-Use Network Security Groups (NSGs) to restrict traffic to specific IP ranges or ports.
-Ensure only HTTP/HTTPS traffic is allowed.
-3. Robust Backup Solution:
-VM and Application-Level Backup:
-Use Azure Backup with a Recovery Services Vault (RSV).
-Configuration Steps:
-Create a Recovery Services Vault in Azure.
-Define a Backup Policy:
-Schedule daily backups.
-Retain backups for 30 days or per requirements.
-Add both VMs to the backup policy.
-Perform Application-Consistent Snapshots to ensure database and app integrity during backups.
-Database Backups:
-If using Azure SQL Database, enable Point-in-Time Restore to handle database backups automatically.
-For on-VM databases, include them in the VM-level backups or set up separate database backups using tools like SQL Server Management Studio.
-Restore Process:
-From the Recovery Services Vault, restore entire VMs, files, or applications as needed.
-4. Centralized Log Management:
-Log Analytics Workspace:
-Create an Azure Log Analytics Workspace to collect logs from VMs and applications.
-Azure Monitor Agent:
-Install the Azure Monitor Agent on both VMs:
-It collects operating system logs, performance metrics, and application logs.
-Send logs to the Log Analytics Workspace for centralized monitoring.
-Use Cases:
-Operational Insights:
-Monitor VM health, disk usage, and network activity.
-Troubleshooting:
-Analyze application errors or crashes by querying logs in the workspace.
-Auditing:
-Keep a record of system events and access logs for compliance.
-Decision Summary:
-Cost Considerations:
-
-Use a Public Load Balancer and Availability Set instead of a Scale Set to reduce costs.
-Avoid additional storage accounts unless the apps need databases.
-Consider Azure App Service if long-term costs for VMs outweigh benefits.
-Security Measures:
-
-Use NSGs, application-level firewalls, and secure database connections.
-Encrypt backups and restrict access to Recovery Services Vault.
-This design balances cost and security while meeting high availability and data protection requirements.
-
---------------------------------------------------------------------------------------------------------------
-AUf sprache deutsch :
-
-Umsetzungsschritte in Azure: Web-Service, Load Balancer, Backups und Log-Management
-1. Webservice-Design:
-Hosting von 2 Apps auf Azure-VMs:
-Konfiguration:
-
-Erstellen Sie zwei separate Azure-VMs (VM1 und VM2).
-Installieren Sie IIS (Internet Information Services) auf beiden VMs.
-Hosten Sie eine einfache Webseite auf jeder VM (z. B. „VM1 ist online“ und „VM2 ist online“).
-Kein separater Azure Storage-Account erforderlich, da die Webseiten direkt in IIS gehostet werden.
-Availability Set:
-
-Platzieren Sie beide VMs in einem Availability Set, um hohe Verfügbarkeit bei geplanten Azure-Updates oder Hardwareausfällen sicherzustellen.
-Entscheidung über Scale Set:
-
-Ein Virtual Machine Scale Set wird nicht benötigt, da die Webseiten statisch sind. Dies reduziert die Kosten.
-Alternative (Web App Service):
-
-Erwägen Sie Azure App Service anstelle von VMs, um Kosten und Verwaltungsaufwand zu reduzieren, da es sich um eine Plattform als Dienstleistung (PaaS) handelt.
-Datenbank-Speicheroptionen:
-Wenn die Apps eine Datenbank benötigen:
-Nutzen Sie Azure SQL Database (PaaS) für eine bessere Leistung und weniger Verwaltungsaufwand.
-Alternativ können Sie eine Datenbank direkt auf einer VM hosten, was jedoch weniger sicher und skalierbar ist.
-2. Azure Load Balancer:
-Public Load Balancer:
-Nutzen Sie einen Public Load Balancer, um eingehenden Traffic zwischen VM1 und VM2 zu verteilen.
-
-Konfigurationsschritte:
-
-Erstellen Sie einen Public Load Balancer in Azure.
-Fügen Sie beide VMs zum Backend Pool hinzu.
-Richten Sie einen Health Probe ein (z. B. HTTP/TCP auf Port 80), um sicherzustellen, dass Traffic nur an gesunde VMs weitergeleitet wird.
-Erstellen Sie eine Load Balancing Rule, um Traffic zwischen den VMs zu verteilen.
-Sicherheitsmaßnahmen:
-
-Nutzen Sie Network Security Groups (NSGs), um Traffic auf spezifische IP-Bereiche oder Ports zu beschränken.
-Erlauben Sie nur HTTP/HTTPS-Traffic.
-3. Robuste Backup-Lösung:
-VM- und Anwendungs-Backup:
-Nutzen Sie Azure Backup mit einem Recovery Services Vault (RSV).
-
-Konfigurationsschritte:
-
-Erstellen Sie einen Recovery Services Vault in Azure.
-Definieren Sie eine Backup-Policy:
-Planen Sie tägliche Backups.
-Legen Sie die Aufbewahrungsdauer der Backups (z. B. 30 Tage) fest.
-Fügen Sie beide VMs der Backup-Policy hinzu.
-Aktivieren Sie Application-Consistent Snapshots, um die Integrität von Datenbanken und Apps während der Backups sicherzustellen.
-Datenbank-Backups:
-Wenn Sie Azure SQL Database verwenden, aktivieren Sie die Point-in-Time-Wiederherstellung, um automatische Backups zu nutzen.
-Für On-VM-Datenbanken können Sie entweder:
-Sie in die VM-Backups einschließen oder
-Separate Backups mit SQL Server-Tools planen.
-Wiederherstellung:
-VMs, Dateien oder Anwendungen können über den Recovery Services Vault wiederhergestellt werden.
-4. Zentrales Log-Management:
-Log Analytics Workspace:
-Erstellen Sie einen Azure Log Analytics Workspace, um Logs von VMs und Anwendungen zu sammeln.
-Azure Monitor Agent:
-Installieren Sie den Azure Monitor Agent auf beiden VMs:
-Dieser sammelt System-Logs, Leistungsmetriken und Anwendungs-Logs.
-Die Logs werden an den Log Analytics Workspace gesendet.
-Nutzung:
-Betriebsüberwachung:
-Überwachen Sie den Zustand der VMs, Festplattennutzung und Netzwerkauslastung.
-Fehlerbehebung:
-Analysieren Sie Anwendungsfehler oder Abstürze mit Abfragen im Log Analytics Workspace.
-Auditierung:
-Speichern Sie Systemereignisse und Zugrifflogs zur Einhaltung von Vorschriften.
-Zusammenfassung der Entscheidungen:
-Kostenoptimierung:
-
-Verwenden Sie Public Load Balancer und Availability Set, um Kosten zu senken.
-Vermeiden Sie zusätzliche Ressourcen wie Storage Accounts oder Scale Sets, sofern nicht unbedingt erforderlich.
-Prüfen Sie die langfristigen Kosten für VMs im Vergleich zu Azure App Services.
-Sicherheitsmaßnahmen:
-
-Verwenden Sie NSGs, Application Firewalls und verschlüsselte Verbindungen für Datenbanken.
-Verschlüsseln Sie Backups und beschränken Sie den Zugriff auf den Recovery Services Vault.
-Diese Lösung gewährleistet hohe Verfügbarkeit, Datensicherheit und zentralisierte Log-Überwachung, während sie kosteneffizient bleibt.
---------------------------------------------------------------------------------------
 
