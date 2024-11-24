@@ -1,4 +1,4 @@
- Web Service Design:
+Web Service Design:
 Hosting 2 Apps on Azure VMs:
 Configuration:
 
@@ -74,3 +74,89 @@ Security Measures:
 Use NSGs, application-level firewalls, and secure database connections.
 Encrypt backups and restrict access to Recovery Services Vault.
 This design balances cost and security while meeting high availability and data protection requirements.
+
+--------------------------------------------------------------------------------------------------------------
+AUf sprache deutsch :
+
+Umsetzungsschritte in Azure: Web-Service, Load Balancer, Backups und Log-Management
+1. Webservice-Design:
+Hosting von 2 Apps auf Azure-VMs:
+Konfiguration:
+
+Erstellen Sie zwei separate Azure-VMs (VM1 und VM2).
+Installieren Sie IIS (Internet Information Services) auf beiden VMs.
+Hosten Sie eine einfache Webseite auf jeder VM (z. B. „VM1 ist online“ und „VM2 ist online“).
+Kein separater Azure Storage-Account erforderlich, da die Webseiten direkt in IIS gehostet werden.
+Availability Set:
+
+Platzieren Sie beide VMs in einem Availability Set, um hohe Verfügbarkeit bei geplanten Azure-Updates oder Hardwareausfällen sicherzustellen.
+Entscheidung über Scale Set:
+
+Ein Virtual Machine Scale Set wird nicht benötigt, da die Webseiten statisch sind. Dies reduziert die Kosten.
+Alternative (Web App Service):
+
+Erwägen Sie Azure App Service anstelle von VMs, um Kosten und Verwaltungsaufwand zu reduzieren, da es sich um eine Plattform als Dienstleistung (PaaS) handelt.
+Datenbank-Speicheroptionen:
+Wenn die Apps eine Datenbank benötigen:
+Nutzen Sie Azure SQL Database (PaaS) für eine bessere Leistung und weniger Verwaltungsaufwand.
+Alternativ können Sie eine Datenbank direkt auf einer VM hosten, was jedoch weniger sicher und skalierbar ist.
+2. Azure Load Balancer:
+Public Load Balancer:
+Nutzen Sie einen Public Load Balancer, um eingehenden Traffic zwischen VM1 und VM2 zu verteilen.
+
+Konfigurationsschritte:
+
+Erstellen Sie einen Public Load Balancer in Azure.
+Fügen Sie beide VMs zum Backend Pool hinzu.
+Richten Sie einen Health Probe ein (z. B. HTTP/TCP auf Port 80), um sicherzustellen, dass Traffic nur an gesunde VMs weitergeleitet wird.
+Erstellen Sie eine Load Balancing Rule, um Traffic zwischen den VMs zu verteilen.
+Sicherheitsmaßnahmen:
+
+Nutzen Sie Network Security Groups (NSGs), um Traffic auf spezifische IP-Bereiche oder Ports zu beschränken.
+Erlauben Sie nur HTTP/HTTPS-Traffic.
+3. Robuste Backup-Lösung:
+VM- und Anwendungs-Backup:
+Nutzen Sie Azure Backup mit einem Recovery Services Vault (RSV).
+
+Konfigurationsschritte:
+
+Erstellen Sie einen Recovery Services Vault in Azure.
+Definieren Sie eine Backup-Policy:
+Planen Sie tägliche Backups.
+Legen Sie die Aufbewahrungsdauer der Backups (z. B. 30 Tage) fest.
+Fügen Sie beide VMs der Backup-Policy hinzu.
+Aktivieren Sie Application-Consistent Snapshots, um die Integrität von Datenbanken und Apps während der Backups sicherzustellen.
+Datenbank-Backups:
+Wenn Sie Azure SQL Database verwenden, aktivieren Sie die Point-in-Time-Wiederherstellung, um automatische Backups zu nutzen.
+Für On-VM-Datenbanken können Sie entweder:
+Sie in die VM-Backups einschließen oder
+Separate Backups mit SQL Server-Tools planen.
+Wiederherstellung:
+VMs, Dateien oder Anwendungen können über den Recovery Services Vault wiederhergestellt werden.
+4. Zentrales Log-Management:
+Log Analytics Workspace:
+Erstellen Sie einen Azure Log Analytics Workspace, um Logs von VMs und Anwendungen zu sammeln.
+Azure Monitor Agent:
+Installieren Sie den Azure Monitor Agent auf beiden VMs:
+Dieser sammelt System-Logs, Leistungsmetriken und Anwendungs-Logs.
+Die Logs werden an den Log Analytics Workspace gesendet.
+Nutzung:
+Betriebsüberwachung:
+Überwachen Sie den Zustand der VMs, Festplattennutzung und Netzwerkauslastung.
+Fehlerbehebung:
+Analysieren Sie Anwendungsfehler oder Abstürze mit Abfragen im Log Analytics Workspace.
+Auditierung:
+Speichern Sie Systemereignisse und Zugrifflogs zur Einhaltung von Vorschriften.
+Zusammenfassung der Entscheidungen:
+Kostenoptimierung:
+
+Verwenden Sie Public Load Balancer und Availability Set, um Kosten zu senken.
+Vermeiden Sie zusätzliche Ressourcen wie Storage Accounts oder Scale Sets, sofern nicht unbedingt erforderlich.
+Prüfen Sie die langfristigen Kosten für VMs im Vergleich zu Azure App Services.
+Sicherheitsmaßnahmen:
+
+Verwenden Sie NSGs, Application Firewalls und verschlüsselte Verbindungen für Datenbanken.
+Verschlüsseln Sie Backups und beschränken Sie den Zugriff auf den Recovery Services Vault.
+Diese Lösung gewährleistet hohe Verfügbarkeit, Datensicherheit und zentralisierte Log-Überwachung, während sie kosteneffizient bleibt.
+--------------------------------------------------------------------------------------
+
