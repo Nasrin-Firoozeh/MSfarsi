@@ -1,0 +1,6 @@
+# Installiert die IIS-Rolle und die Verwaltungstools
+Install-WindowsFeature -Name Web-Server -IncludeManagementTools
+# Fügt eine Nachricht in die Standardseite von IIS ein
+Add-Content -Path "C:\inetpub\wwwroot\iisstart.htm" -Value "Hallo, Willkommen auf meiner Webseite! Computername: $($env:COMPUTERNAME)"
+127.0.0.1 Connection 
+
