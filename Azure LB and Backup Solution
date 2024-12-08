@@ -159,5 +159,12 @@ Verwenden Sie NSGs, Application Firewalls und verschlüsselte Verbindungen für 
 Verschlüsseln Sie Backups und beschränken Sie den Zugriff auf den Recovery Services Vault.
 Diese Lösung gewährleistet hohe Verfügbarkeit, Datensicherheit und zentralisierte Log-Überwachung, während sie kosteneffizient bleibt.
 --------------------------------------------------------------------------------------
+# Backup onprimiss
+https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault
+https://www.youtube.com/watch?v=PcJ6fMcrcrg
+#Azure Backup and Recovery Step by Step Demo | VM Backup Tutorial
+https://www.youtube.com/watch?v=cNLW0GWHoxs
+# How Azuer Start Automat und Schtdown 
+https://www.youtube.com/watch?v=f9izZy-3H2U
 
 
