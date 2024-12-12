@@ -20,7 +20,78 @@ Expectations:
 •	Backup Solution Implementation: They must demonstrate how to schedule backups and how to restore applications or VMs from backups in case of failure.
 •	Log Storage and Monitoring: Students should set up a logging solution that cap-tures application and system logs from both VMs. Scenario Summary:
 In this scenario, students will design and implement a highly available solution using Azure Load Balancer, ensure data protection with a robust backup solution, and set up centralized log storage and monitoring for the applications hosted on Azure VMs.
+---------------------------------------------------------------------------------------------------------------------------------
 
+Auf Deusch:
+Szenario: Azure Load Balancer und Backup-Lösung für WebServe Solutions
+Überblick des Szenarios:
+
+Webserie Solutions betreibt zwei kritische Anwendungen, die jeweils auf separaten virtuellen Maschinen (VMs) in Azure gehostet werden. Ziel ist es, die Verfügbarkeit durch einen Azure Load Balancer zu erhöhen, eine robuste Backup-Lösung einzurichten und ein zentrales Logging-System für die Speicherung und Überwachung von Anwendungsprotokollen zu implementieren.
+Ziele:
+Azure Load Balancer einrichten:
+Verkehr wird gleichmäßig zwischen zwei VMs verteilt.
+Konfiguration von Health-Probes zur Überwachung der VMs und Umleitung des Verkehrs nur auf gesunde Instanzen.
+Backup-Lösung für Anwendungen:
+Sicherstellen, dass Anwendungen und Daten regelmäßig gesichert werden.
+Wiederherstellungsoption für VMs und Anwendungen bei Ausfällen.
+Protokollspeicherung einrichten:
+Logs der Anwendungen sammeln und in einer zentralen Azure-Ressource speichern.
+Überwachung und Fehlerbehebung durch Analyse der Protokolle ermöglichen.
+Wichtige Überlegungen:
+Load Balancer-Design:
+Wählen zwischen:
+Public Load Balancer: Für Anwendungen mit externem Zugriff.
+Internal Load Balancer: Für interne Anwendungen ohne externen Zugriff.
+Backup-Lösung:
+Anwendungssicherung auf mehreren Ebenen:
+VM-Snapshots
+Backup auf Anwendungs- und Datenbankebene
+Azure Backup Service für automatisierte Backups nutzen.
+Log-Management:
+Logs zentral in Azure Monitor Logs (früher Log Analytics) speichern.
+Alarm- und Monitoring-Regeln einrichten.
+Kostenoptimierung:
+Einsatz kosteneffizienter Azure-Dienste.
+Überprüfung von Speicher- und Backup-Laufzeiten.
+Implementierungsschritte:
+1. Azure Load Balancer konfigurieren
+Erstellen eines Public oder Internal Load Balancer.
+Hinzufügen der beiden VMs als Backend-Pool.
+Konfiguration von Health-Probes (z. B. TCP auf Port 80) zur Überprüfung der VM-Gesundheit.
+Erstellung von Load-Balancing-Regeln:
+Eingehender Traffic wird basierend auf den Health-Probe-Ergebnissen verteilt.
+2. Backup-Lösung einrichten
+Aktivieren von Azure Backup:
+Registrierung der VMs im Recovery Services Vault.
+Konfiguration eines Backup-Policys für tägliche Backups mit definierten Aufbewahrungsfristen.
+Sicherung der Anwendungsdaten:
+Nutzung von Azure File Share Backup oder Datenbank-spezifischen Sicherungen.
+Wiederherstellungsszenarien testen:
+Point-in-Time Recovery für Datenbanken.
+Wiederherstellung einer VM aus dem Recovery Services Vault.
+3. Logs speichern und überwachen
+Einrichtung von Azure Monitor Logs:
+Installation der Azure Monitor-Agenten auf beiden VMs.
+Konfiguration eines Log Analytics Workspace.
+Erfassen und Abfragen von Logs:
+Systemprotokolle (z. B. Ereignisanzeige, Fehlerprotokolle).
+Anwendungsprotokolle, falls spezifisch aktiviert.
+Alarme und Benachrichtigungen:
+Einrichten von Benachrichtigungen bei bestimmten Ereignissen oder Schwellenwerten.
+Demonstrationsanforderungen:
+
+1. Demonstration des Azure Load Balancer
+Zeigen, wie eingehender Verkehr basierend auf Health-Probes zwischen den VMs verteilt wird.
+Testen der Traffic-Umleitung, wenn eine VM nicht verfügbar ist.
+2. Backup-Lösung implementieren
+Backup-Zeitplan konfigurieren und auslösen.
+Wiederherstellen einer VM oder Datenbank aus einem Backup.
+3. Log-Speicherung und Überwachung
+Protokolle in Azure Monitor Logs anzeigen.
+Abfragen zur Analyse von Fehlern erstellen.
+Überwachung und Alarme vorführen.
+Zusammenfassung:
+In diesem Szenario erstellen Sie eine Lösung für hohe Verfügbarkeit und Datensicherung. Durch den Einsatz des Azure Load Balancer, Azure Backup und Azure Monitor stellen Sie sicher, dass die Anwendungen stabil, sicher und gut überwachbar sind.
 
 
 
